@@ -35,20 +35,31 @@ public class Tilmelding {
     }
 
     public double beregnKonferencePris(){
-        double result = (konference.getAfgiftPrDag() * ChronoUnit.DAYS.between(ankomstDato,afrejseDato));
+        double result = 0.0;
+        if(deltager.isErForedragsholder()){
+            return result;
+        }else{
+            result = (konference.getAfgiftPrDag() * (ChronoUnit.DAYS.between(ankomstDato,afrejseDato) +1));
+        }
         return result;
     }
 
     public double beregnHotelPris(){
         double result = 0.0;
-        if(hotel.equals(null)){
-            return result;
+        try {
+            if(hotel == (null)){
+                return result;
+            }
+            if(deltager.getLedsager() == (null)){
+                result = hotel.getPrisEnkeltVærelse() * (ChronoUnit.DAYS.between(ankomstDato,afrejseDato));
+            }else {
+                result = hotel.getPrisDoubleVærelse() * (ChronoUnit.DAYS.between(ankomstDato,afrejseDato));
+
+            }
+        } catch (NullPointerException nullPointerException){
+            // Do nothing
         }
-        if(deltager.getLedsager().equals(null)){
-            result = hotel.getPrisDoubleVærelse() * ChronoUnit.DAYS.between(ankomstDato,afrejseDato);
-        }else {
-            result = hotel.getPrisEnkeltVærelse() * ChronoUnit.DAYS.between(ankomstDato,afrejseDato);
-        }
+
         return result;
     }
 
@@ -57,12 +68,12 @@ public class Tilmelding {
         for (Tillæg t : tillægslist){
             result += t.getPris();
         }
-        return result;
+        return result * ChronoUnit.DAYS.between(ankomstDato,afrejseDato);
     }
 
     public double beregnUdflugtsPrisen(){
         double result = 0.0;
-        if(!deltager.getLedsager().equals(null)){
+        if(deltager.getLedsager() != null){
             result += deltager.getLedsager().samletPrisForUdflugter();
         }
         return result;

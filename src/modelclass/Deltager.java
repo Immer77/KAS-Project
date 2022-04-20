@@ -52,4 +52,8 @@ public class Deltager extends Person {
             this.ledsager = null;
         }
     }
+
+    public boolean isErForedragsholder() {
+        return erForedragsholder;
+    }
 }
