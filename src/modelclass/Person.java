@@ -22,4 +22,12 @@ public class Person {
     public ArrayList<Deltager> getDeltagere() {
         return new ArrayList<>(deltagere);
     }
+
+    public String getNavn() {
+        return navn;
+    }
+
+    public int getTlfNr() {
+        return tlfNr;
+    }
 }

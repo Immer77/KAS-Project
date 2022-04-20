@@ -10,6 +10,7 @@ public class Storage {
     private static ArrayList<Arrangement> arrangementer = new ArrayList<>();
     private static ArrayList<Hotel> hoteller = new ArrayList<>();
     private static ArrayList<Konference> konferencer = new ArrayList<>();
+    private static ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
 
     //-----------------------------------------------------------------
 
@@ -67,6 +68,12 @@ public class Storage {
 
     public static void removeKonference(Konference konference){
         konferencer.remove(konference);
+    }
+
+    //-----------------------------------------------------------------
+
+    public static ArrayList<Tilmelding> getTilmeldinger(){
+        return new ArrayList<>(tilmeldinger);
     }
 
 }
