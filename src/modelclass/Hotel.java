@@ -9,9 +9,11 @@ public class Hotel {
     private ArrayList<Tillæg> tillægslist = new ArrayList<>();
     private ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
 
-    public Hotel(String navn, String adresse){
+    public Hotel(String navn, String adresse, double prisEnkeltVærelse, double prisDoubleVærelse){
         this.navn = navn;
         this.adresse = adresse;
+        this.prisEnkeltVærelse = prisEnkeltVærelse;
+        this.prisDoubleVærelse = prisDoubleVærelse;
     }
 
     /**
@@ -53,4 +55,19 @@ public class Hotel {
         tilmeldinger.remove(tilmelding);
     }
 
+    public double getPrisEnkeltVærelse() {
+        return prisEnkeltVærelse;
+    }
+
+    public void setPrisEnkeltVærelse(double prisEnkeltVærelse) {
+        this.prisEnkeltVærelse = prisEnkeltVærelse;
+    }
+
+    public double getPrisDoubleVærelse() {
+        return prisDoubleVærelse;
+    }
+
+    public void setPrisDoubleVærelse(double prisDoubleVærelse) {
+        this.prisDoubleVærelse = prisDoubleVærelse;
+    }
 }

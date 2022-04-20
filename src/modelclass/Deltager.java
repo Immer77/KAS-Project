@@ -37,7 +37,7 @@ public class Deltager extends Person {
      * @return
      */
     public Ledsager createLedsager(String navn){
-        Ledsager ledsager = new Ledsager(navn);
+        Ledsager ledsager = new Ledsager(navn, this);
         this.ledsager = ledsager;
         return ledsager;
     }
@@ -45,6 +45,7 @@ public class Deltager extends Person {
     public Ledsager getLedsager() {
         return ledsager;
     }
+
 
     public void removeLedsager(){
         if(ledsager != null) {

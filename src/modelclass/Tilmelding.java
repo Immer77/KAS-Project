@@ -1,6 +1,7 @@
 package modelclass;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Tilmelding {
@@ -11,7 +12,7 @@ public class Tilmelding {
     private Deltager deltager;
     private ArrayList<Tillæg> tillægslist = new ArrayList<>();
 
-    public Tilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager, Konference konference, Hotel hotel){
+    public Tilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager, Hotel hotel, Konference konference){
         this.land = land;
         this.by = by;
         this.ankomstDato = ankomstDato;
@@ -29,9 +30,44 @@ public class Tilmelding {
      * beregner den samlede pris for tilmeldingen
      * @return
      */
-    public double beregnSamletPris(){
-        return 0.0;
+    public double beregnSamletPris() {
+        return beregnHotelPris() + beregnKonferencePris() + beregnTillægsPris() + beregnUdflugtsPrisen();
     }
+
+    public double beregnKonferencePris(){
+        double result = (konference.getAfgiftPrDag() * ChronoUnit.DAYS.between(ankomstDato,afrejseDato));
+        return result;
+    }
+
+    public double beregnHotelPris(){
+        double result = 0.0;
+        if(hotel.equals(null)){
+            return result;
+        }
+        if(deltager.getLedsager().equals(null)){
+            result = hotel.getPrisDoubleVærelse() * ChronoUnit.DAYS.between(ankomstDato,afrejseDato);
+        }else {
+            result = hotel.getPrisEnkeltVærelse() * ChronoUnit.DAYS.between(ankomstDato,afrejseDato);
+        }
+        return result;
+    }
+
+    public double beregnTillægsPris(){
+        double result = 0.0;
+        for (Tillæg t : tillægslist){
+            result += t.getPris();
+        }
+        return result;
+    }
+
+    public double beregnUdflugtsPrisen(){
+        double result = 0.0;
+        if(!deltager.getLedsager().equals(null)){
+            result += deltager.getLedsager().samletPrisForUdflugter();
+        }
+        return result;
+    }
+
 
     public Konference getKonference() {
         return konference;

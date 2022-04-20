@@ -1,2 +1,5 @@
-package gui;public class App {
+package gui;
+
+public class App {
+
 }
