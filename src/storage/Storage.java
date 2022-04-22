@@ -72,31 +72,4 @@ public class Storage {
     }
 
     //-----------------------------------------------------------------
-
-    public static ArrayList<Tilmelding> getTilmeldinger(){
-        return new ArrayList<>(tilmeldinger);
-    }
-
-    public static void addTilmelding(Tilmelding tilmelding){
-        tilmeldinger.add(tilmelding);
-    }
-
-    public static void removeTilmelding(Tilmelding tilmelding){
-        tilmeldinger.remove(tilmelding);
-    }
-
-    //-----------------------------------------------------------------
-
-//    public static ArrayList<Tillæg> getTillæg(){
-//        return new ArrayList<>(tillægs);
-//    }
-//
-//    public static void addTillæg(Tillæg tillæg){
-//        tillægs.add(tillæg);
-//    }
-//
-//    public static void removeTillæg(Tillæg tillæg){
-//        tillægs.remove(tillæg);
-//    }
-
 }
