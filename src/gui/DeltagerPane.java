@@ -1,2 +1,4 @@
-package gui;public class DeltagerPane {
+package gui;
+
+public class DeltagerPane {
 }

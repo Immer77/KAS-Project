@@ -1,2 +1,4 @@
-package gui;public class KonferenceWindow {
+package gui;
+
+public class KonferenceWindow {
 }

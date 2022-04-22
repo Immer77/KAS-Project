@@ -1,2 +1,4 @@
-package gui;public class HotelWindow {
+package gui;
+
+public class HotelWindow {
 }

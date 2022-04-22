@@ -1,2 +1,4 @@
-package gui;public class ArrangementWindow {
+package gui;
+
+public class ArrangementWindow {
 }

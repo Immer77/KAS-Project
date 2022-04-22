@@ -75,6 +75,10 @@ public class Controller {
         return tillæg;
     }
 
+    public static void addTillægToTilmelding(Tilmelding tilmelding, Tillæg tillæg){
+        tilmelding.addTillæg(tillæg);
+    }
+
     //-------------------------------------------------------------------------------
 
     public static Tilmelding createTilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager,Hotel hotel, Konference konference){
@@ -118,12 +122,12 @@ public class Controller {
         l1.addArrangement(a2);
         l1.addArrangement(a3);
         Tilmelding t3 = createTilmelding("Danmark", "Bedsted", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22), d3, h1, konference);
-        t3.addTillæg(tillæg1);
+        addTillægToTilmelding(t3,tillæg1);
 
         Deltager d4 = createDeltager("Lone Jensen", "Prutvej 2", 20321412,2341312,true,"2sdafasd",1234121);
         Tilmelding t4 = createTilmelding("Afghanistan", "Jerusalem", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22), d4,h1,konference);
         Ledsager l2 = createLedsager("Finn Madsen", d4);
-        t4.addTillæg(tillæg1);
+        addTillægToTilmelding(t4,tillæg1);
         l2.addArrangement(a1);
         l2.addArrangement(a2);
 
