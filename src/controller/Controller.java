@@ -68,8 +68,26 @@ public class Controller {
         return Storage.getArrangementer();
     }
 
+    //-------------------------------------------------------------------------------
+
+    public static Tillæg createTillæg(double pris, String navn, Hotel hotel){
+        Tillæg tillæg = hotel.createTillæg(pris,navn);
+        return tillæg;
+    }
+
+
+
     public static void initStorage(){
         //TODO: Laves næste gang
+        createKonference("Hav og Himmel", "Sønderhøj 30", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22),1500);
+        Hotel h1 = createHotel("Den hvide svane","HvideSvanevej 10", 1050.0,1250.0);
+        createTillæg(50,"Wifi", h1);
+
+        Hotel h2 = createHotel("Høtel Phønix","Phønixvej 14",700.0,800.0);
+        createTillæg(200,"Bad", h2);
+        createTillæg(75,"Wifi", h2);
+
+
     }
 
     public static void init(){

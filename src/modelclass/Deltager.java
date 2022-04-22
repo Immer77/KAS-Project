@@ -56,4 +56,11 @@ public class Deltager extends Person {
     public boolean isErForedragsholder() {
         return erForedragsholder;
     }
+    public double samletPrisUdflugter(){
+        double result = 0.0;
+        if(getLedsager() != null){
+            result += ledsager.samletPrisForUdflugter();
+        }
+        return result;
+    }
 }

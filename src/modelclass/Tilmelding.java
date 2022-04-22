@@ -31,10 +31,10 @@ public class Tilmelding {
      * @return
      */
     public double beregnSamletPris() {
-        return beregnHotelPris() + beregnKonferencePris() + beregnTillægsPris() + beregnUdflugtsPrisen();
+        return beregnHotelPris() + beregnKonferencePris() + beregnTillægsPris() + deltager.samletPrisUdflugter();
     }
 
-    public double beregnKonferencePris(){
+    private double beregnKonferencePris(){
         double result = 0.0;
         if(deltager.isErForedragsholder()){
             return result;
@@ -44,7 +44,7 @@ public class Tilmelding {
         return result;
     }
 
-    public double beregnHotelPris(){
+    private double beregnHotelPris(){
         double result = 0.0;
         try {
             if(hotel == (null)){
@@ -63,22 +63,13 @@ public class Tilmelding {
         return result;
     }
 
-    public double beregnTillægsPris(){
+    private double beregnTillægsPris(){
         double result = 0.0;
         for (Tillæg t : tillægslist){
             result += t.getPris();
         }
         return result * ChronoUnit.DAYS.between(ankomstDato,afrejseDato);
     }
-
-    public double beregnUdflugtsPrisen(){
-        double result = 0.0;
-        if(deltager.getLedsager() != null){
-            result += deltager.getLedsager().samletPrisForUdflugter();
-        }
-        return result;
-    }
-
 
     public Konference getKonference() {
         return konference;
