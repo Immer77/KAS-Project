@@ -75,21 +75,20 @@ public class Controller {
         return tillæg;
     }
 
+    //-------------------------------------------------------------------------------
+
     public static Tilmelding createTilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager,Hotel hotel, Konference konference){
         Tilmelding tilmelding = konference.createTilmelding(land,by,ankomstDato,afrejseDato,deltager,hotel);
         return tilmelding;
     }
+
+    //-------------------------------------------------------------------------------
+
     public static Ledsager createLedsager(String navn, Deltager deltager){
         Ledsager ledsager = deltager.createLedsager(navn);
         return ledsager;
     }
-    public static void addLedsagerToDeltager(Deltager deltager){
-
-    }
-
-
-
-
+    //-------------------------------------------------------------------------------
 
     public static void initStorage(){
         //TODO: Laves næste gang
