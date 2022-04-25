@@ -13,13 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import modelclass.Konference;
 import java.time.LocalDate;
 
 
 
 public class KonferenceWindow extends Stage {
-    private Konference konference;
     private TextField txfNavn, txfLokation, txfFraDato, txfTilDato, txfAfgiftPrDag;
 
     public KonferenceWindow(String title){
@@ -40,9 +38,6 @@ public class KonferenceWindow extends Stage {
         pane.setHgap(10);
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
-
-        Label lblError = new Label();
-        pane.add(lblError,0,10);
 
         Label lblNavn = new Label("Navn på konference ");
         pane.add(lblNavn,0,0,1,1);
@@ -91,15 +86,8 @@ public class KonferenceWindow extends Stage {
         Button btnCancel = new Button("Fortryd");
         hbxButtons.getChildren().add(btnCancel);
         btnCancel.setOnAction(event -> this.cancelAction());
-        
-        this.initControls();
     }
 
-    private void initControls() {
-        if (konference != null){
-
-        }
-    }
 
     private void cancelAction(){
         this.hide();

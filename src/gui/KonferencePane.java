@@ -2,7 +2,6 @@ package gui;
 
 
 import controller.Controller;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -86,14 +85,24 @@ public class KonferencePane extends GridPane {
         hBoxButtons.getChildren().add(btnOpretHotel);
         btnOpretHotel.setOnAction(event -> this.opretHotelAction());
 
+        Button btnTilknytHotel = new Button("Tilknyt hotel");
+        hBoxButtons.getChildren().add(btnTilknytHotel);
+        btnTilknytHotel.setOnAction(event -> this.tilknytHotelAction());
+
     }
 
     private void opretHotelAction() {
-        //TODO
+        HotelWindow hotelWindow = new HotelWindow("Opret hotel");
+        hotelWindow.showAndWait();
+
+        this.updateControls();
     }
 
     private void opretArrangementAction() {
-        //TODO
+        ArrangementWindow arrangementWindow = new ArrangementWindow("Opret arrangement");
+        arrangementWindow.showAndWait();
+
+        this.updateControls();
     }
 
     private void opretKonferenceAction() {
@@ -103,9 +112,17 @@ public class KonferencePane extends GridPane {
         this.updateControls();
     }
 
+    private void tilknytHotelAction(){
+        TilknytHotelWindow tilknytHotelWindow = new TilknytHotelWindow("Tilknyt hotel til konference");
+        tilknytHotelWindow.showAndWait();
+
+        this.updateControls();
+    }
+
     public void updateControls() {
         Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
         lvwKonference.getItems().setAll(Controller.getKonferencer());
+        lvwHoteller.getItems().setAll(Controller.gethoteller());
         if (konference != null) {
             lvwArrangement.getItems().setAll(konference.getArrangementer());
             lvwHoteller.getItems().setAll(konference.getHoteller());
