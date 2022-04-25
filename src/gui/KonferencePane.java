@@ -122,7 +122,6 @@ public class KonferencePane extends GridPane {
     public void updateControls() {
         Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
         lvwKonference.getItems().setAll(Controller.getKonferencer());
-        lvwHoteller.getItems().setAll(Controller.gethoteller());
         if (konference != null) {
             lvwArrangement.getItems().setAll(konference.getArrangementer());
             lvwHoteller.getItems().setAll(konference.getHoteller());
@@ -135,4 +134,3 @@ public class KonferencePane extends GridPane {
         }
     }
 }
-
