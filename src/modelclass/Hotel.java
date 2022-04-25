@@ -70,4 +70,11 @@ public class Hotel {
     public void setPrisDoubleVærelse(double prisDoubleVærelse) {
         this.prisDoubleVærelse = prisDoubleVærelse;
     }
+
+    public String getNavn() {return navn;}
+
+    @Override
+    public String toString() {
+        return navn;
+    }
 }

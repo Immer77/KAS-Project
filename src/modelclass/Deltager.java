@@ -63,4 +63,14 @@ public class Deltager extends Person {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        if(ledsager != null){
+            return getNavn() + " " + getTlfNr() + " (" + ledsager.getNavn() + ")";
+        }
+        else{
+            return getNavn() + " " + getTlfNr();
+        }
+    }
 }

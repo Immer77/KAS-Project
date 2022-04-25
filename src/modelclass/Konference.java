@@ -179,6 +179,11 @@ public class Konference {
     public void setAfgiftPrDag(double afgiftPrDag) {
         this.afgiftPrDag = afgiftPrDag;
     }
+
+    @Override
+    public String toString() {
+        return getNavn();
+    }
 }
 
 
