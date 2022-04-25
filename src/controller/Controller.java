@@ -77,6 +77,7 @@ public class Controller {
     }
 
 
+
     //-------------------------------------------------------------------------------
 
     public static Tillæg createTillæg(double pris, String navn, Hotel hotel){
