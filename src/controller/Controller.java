@@ -95,7 +95,6 @@ public class Controller {
     //-------------------------------------------------------------------------------
 
     public static void initStorage(){
-        //TODO: Laves næste gang
         Konference konference = createKonference("Hav og Himmel", "Sønderhøj 30", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22),1500);
         Hotel h1 = createHotel("Den hvide svane","HvideSvanevej 10", 1050.0,1250.0);
         Tillæg tillæg1 = createTillæg(50,"Wifi", h1);

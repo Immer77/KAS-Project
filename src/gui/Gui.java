@@ -45,6 +45,6 @@ public class Gui extends Application {
 
         DeltagerPane deltagerPane = new DeltagerPane();
         tabDeltager.setContent(deltagerPane);
-        tabDeltager.setOnSelectionChanged(event -> deltagerPane.updateControls());
+//        tabDeltager.setOnSelectionChanged(event -> deltagerPane.updateControls());
    }
 }
