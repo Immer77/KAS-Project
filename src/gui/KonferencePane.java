@@ -4,6 +4,7 @@ package gui;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -36,6 +37,7 @@ public class KonferencePane extends GridPane {
         lvwKonference.setPrefWidth(200);
         lvwKonference.getItems().setAll(Controller.getKonferencer());
         lvwKonference.setEditable(false);
+        lvwKonference.setOnMouseClicked(event -> this.updateControls());
 
         Label lblHotel = new Label("Hoteller");
         this.add(lblHotel, 0, 4);
@@ -68,8 +70,8 @@ public class KonferencePane extends GridPane {
         lvwDeltagere.setEditable(false);
 
         HBox hBoxButtons = new HBox();
-        this.add(hBoxButtons, 0, 9,2,2);
-        hBoxButtons.setPadding(new Insets(1, 1,2,2));
+        this.add(hBoxButtons, 0, 9, 2, 2);
+        hBoxButtons.setPadding(new Insets(1, 1, 2, 2));
         hBoxButtons.setSpacing(10);
         hBoxButtons.setAlignment(Pos.BASELINE_CENTER);
 
@@ -112,25 +114,45 @@ public class KonferencePane extends GridPane {
         this.updateControls();
     }
 
-    private void tilknytHotelAction(){
-        TilknytHotelWindow tilknytHotelWindow = new TilknytHotelWindow("Tilknyt hotel til konference");
+    private void tilknytHotelAction() {
+        TilknytHotelWindow tilknytHotelWindow = new TilknytHotelWindow();
         tilknytHotelWindow.showAndWait();
 
         this.updateControls();
     }
 
     public void updateControls() {
-        Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
-        lvwKonference.getItems().setAll(Controller.getKonferencer());
-        if (konference != null) {
-            lvwArrangement.getItems().setAll(konference.getArrangementer());
+        try {
+            Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
             lvwHoteller.getItems().setAll(konference.getHoteller());
+            lvwArrangement.getItems().setAll(konference.getArrangementer());
             ArrayList<Deltager> deltagers = new ArrayList<>();
-            for (Tilmelding t : konference.getTilmeldinger()){
+            for (Tilmelding t : konference.getTilmeldinger()) {
                 deltagers.add(t.getDeltager());
+
             }
             lvwDeltagere.getItems().setAll(deltagers);
 
+        }catch (NullPointerException ne){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Conference has been selected");
+            alert.setHeaderText("Vælg venligst en konference");
         }
+
+
+
+        //        Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
+//        lvwKonference.getItems().setAll(Controller.getKonferencer());
+//        if (konference != null) {
+//            lvwArrangement.getItems().setAll(konference.getArrangementer());
+//            lvwHoteller.getItems().setAll(konference.getHoteller());
+//            ArrayList<Deltager> deltagers = new ArrayList<>();
+//            for (Tilmelding t : konference.getTilmeldinger()){
+//                deltagers.add(t.getDeltager());
+//            }
+//            lvwDeltagere.getItems().setAll(deltagers);
+//
+//        }
+
     }
 }

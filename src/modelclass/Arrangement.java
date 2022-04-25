@@ -19,10 +19,11 @@ public class Arrangement {
      * @param pris
      * @param dato
      */
-    public Arrangement(String titel, double pris, LocalDate dato){
+    public Arrangement(String titel, double pris, LocalDate dato, Konference konference){
         this.titel = titel;
         this.pris = pris;
         this.dato = dato;
+
     }
 
     /**

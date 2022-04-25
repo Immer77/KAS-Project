@@ -45,6 +45,7 @@ public class Controller {
         return hotel;
     }
 
+
     public static void deleteHotel(Hotel hotel){
         Storage.removeHotel(hotel);
     }
@@ -53,10 +54,17 @@ public class Controller {
         return Storage.getHoteller();
     }
 
+    public static void addHotelToKonference(Konference konference, Hotel hotel){
+        if(!konference.getHoteller().contains(hotel)){
+            konference.addHotel(hotel);
+        }
+    }
+
     //----------------------------------------------------------------------------------------------------------------------------------
 
-    public static Arrangement createArrangement(String titel, double pris, LocalDate dato){
-        Arrangement arrangement = new Arrangement(titel, pris, dato);
+    public static Arrangement createArrangement(String titel, double pris, LocalDate dato, Konference konference){
+        Arrangement arrangement = new Arrangement(titel, pris, dato, konference);
+        konference.addArrangement(arrangement);
         Storage.addArrangement(arrangement);
         return arrangement;
     }
@@ -67,6 +75,7 @@ public class Controller {
     public static ArrayList<Arrangement> getarrangementer(){
         return Storage.getArrangementer();
     }
+
 
     //-------------------------------------------------------------------------------
 
@@ -114,9 +123,9 @@ public class Controller {
         Hotel h3 = createHotel("Pension Tusindfryd", "Tusindfrydsvej 10", 500.0,600.0);
         Tillæg tillæg4 = createTillæg(100,"Morgenmad",h3);
 
-        Arrangement a1 = createArrangement("Byrundtur Odense", 125,LocalDate.of(2022,4,21));
-        Arrangement a2 = createArrangement("Egeskov",75,LocalDate.of(2022,4,20));
-        Arrangement a3 = createArrangement("Trapholt Museum", 200, LocalDate.of(2022,4,22));
+        Arrangement a1 = createArrangement("Byrundtur Odense", 125,LocalDate.of(2022,4,21), konference);
+        Arrangement a2 = createArrangement("Egeskov",75,LocalDate.of(2022,4,20),konference);
+        Arrangement a3 = createArrangement("Trapholt Museum", 200, LocalDate.of(2022,4,22),konference);
 
         Deltager d1 = createDeltager("Finn Madsen", "Vejen 10", 88888888, false, "Intet firma", 0);
         createTilmelding("Danmark", "Bedsted", LocalDate.of(2022,4,20), LocalDate.of(2022,4,22), d1, null,konference);

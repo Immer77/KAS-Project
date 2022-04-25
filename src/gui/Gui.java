@@ -38,6 +38,7 @@ public class Gui extends Application {
 
         KonferencePane konferencePane = new KonferencePane();
         tabKonference.setContent(konferencePane);
+        tabKonference.setOnSelectionChanged(event -> konferencePane.updateControls());
 
 
         Tab tabDeltager = new Tab("Deltager");

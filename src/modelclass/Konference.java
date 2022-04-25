@@ -78,8 +78,8 @@ public class Konference {
      * @param dato
      * @return
      */
-    public Arrangement createArrangement(String titel, double pris, LocalDate dato){
-        Arrangement arrangement = new Arrangement(titel, pris, dato);
+    public Arrangement createArrangement(String titel, double pris, LocalDate dato, Konference konference){
+        Arrangement arrangement = new Arrangement(titel, pris, dato, this);
         arrangementer.add(arrangement);
         return arrangement;
     }

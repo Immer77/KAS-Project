@@ -13,9 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modelclass.Arrangement;
 import modelclass.Konference;
-import modelclass.Tillæg;
 
-import java.awt.*;
 import java.time.LocalDate;
 
 public class ArrangementWindow extends Stage {
@@ -80,7 +78,7 @@ public class ArrangementWindow extends Stage {
         LocalDate dato = LocalDate.parse(txfDato.getText());
         double pris = Double.parseDouble(txfPris.getText());
         if (titel.length() > 0 && dato.isAfter(LocalDate.now())) {
-            Controller.createArrangement(titel, pris, dato);
+            Controller.createArrangement(titel, pris, dato,konference);
             this.hide();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

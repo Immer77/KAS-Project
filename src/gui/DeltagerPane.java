@@ -163,6 +163,7 @@ public class DeltagerPane extends GridPane {
 
     public void opretTilmeldingAction() {
         Deltager d1 = Controller.createDeltager(txfNavn.getText(),txfAdresse.getText(), Integer.parseInt(txfTlfNr.getText()), chBoxForedragsHolder.isSelected(), txfFirmaNavn.getText(), Integer.parseInt(txfFirmaTlf.getText()));
+        System.out.println(Controller.getdeltagere());
         if(chBoxLedsager.isSelected()){
             Ledsager l1 = Controller.createLedsager(txfLedsagerNavn.getText(), d1);
             Controller.addArrangementToLedsager(lvwArrangement.getSelectionModel().getSelectedItem(),l1);
@@ -170,10 +171,13 @@ public class DeltagerPane extends GridPane {
         if(lvwKonferencer.getSelectionModel().getSelectedItem() != null){
             if(chBoxHotel.isSelected()){
                 Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, lvwHotel.getSelectionModel().getSelectedItem(), lvwKonferencer.getSelectionModel().getSelectedItem());
+                System.out.println(Controller.getdeltagere());
                 clearTextFields();
             }else{
                 Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, null, lvwKonferencer.getSelectionModel().getSelectedItem());
+                System.out.println(Controller.getdeltagere());
                 clearTextFields();
+
             }
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
