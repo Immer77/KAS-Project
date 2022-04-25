@@ -38,13 +38,13 @@ public class Gui extends Application {
 
         KonferencePane konferencePane = new KonferencePane();
         tabKonference.setContent(konferencePane);
-        tabKonference.setOnSelectionChanged(event -> konferencePane.updateControls());
+
 
         Tab tabDeltager = new Tab("Deltager");
         tabPane.getTabs().add(tabDeltager);
 
         DeltagerPane deltagerPane = new DeltagerPane();
         tabDeltager.setContent(deltagerPane);
-//        tabDeltager.setOnSelectionChanged(event -> deltagerPane.updateControls());
+        tabDeltager.setOnSelectionChanged(event -> deltagerPane.updateTab());
    }
 }

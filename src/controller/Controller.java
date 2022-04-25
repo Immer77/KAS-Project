@@ -126,7 +126,7 @@ public class Controller {
 
         Deltager d3 = createDeltager("Peter Sommer", "Skanderborgvej",88888888,false,"Ptur",12930102);
         Ledsager l1 = createLedsager("Mie Sommer",d3);
-        addArrangementToLedsager(a1,l1);
+
         Tilmelding t3 = createTilmelding("Danmark", "Bedsted", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22), d3, h1, konference);
         addTillægToTilmelding(t3,tillæg1);
 
