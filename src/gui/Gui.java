@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Gui extends Application {
 
     public void start(Stage stage) {
-        stage.setTitle("");
+        stage.setTitle("Konference App");
         BorderPane pane = new BorderPane();
         this.initContent(pane);
 

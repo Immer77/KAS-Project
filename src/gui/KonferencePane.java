@@ -33,9 +33,10 @@ public class KonferencePane extends GridPane {
 
         lvwKonference = new ListView<>();
         this.add(lvwKonference, 0, 1, 1, 3);
-        lvwKonference.setPrefHeight(100);
+        lvwKonference.setPrefHeight(200);
         lvwKonference.setPrefWidth(200);
         lvwKonference.getItems().setAll(Controller.getKonferencer());
+        lvwKonference.setEditable(false);
 
         Label lblHotel = new Label("Hoteller");
         this.add(lblHotel, 0, 4);
@@ -43,8 +44,9 @@ public class KonferencePane extends GridPane {
         lvwHoteller = new ListView<>();
         this.add(lvwHoteller, 0, 5, 1, 3);
         lvwHoteller.setPrefWidth(200);
-        lvwHoteller.setPrefHeight(100);
+        lvwHoteller.setPrefHeight(200);
         lvwHoteller.getItems().setAll(Controller.gethoteller());
+        lvwHoteller.setEditable(false);
 
         Label lblArrangement = new Label("Arrangement");
         this.add(lblArrangement, 1, 0);
@@ -52,17 +54,19 @@ public class KonferencePane extends GridPane {
         lvwArrangement = new ListView<>();
         this.add(lvwArrangement, 1, 1, 1, 3);
         lvwArrangement.setPrefHeight(100);
-        lvwArrangement.setPrefWidth(200);
+        lvwArrangement.setPrefWidth(300);
         lvwArrangement.getItems().setAll(Controller.getarrangementer());
+        lvwArrangement.setEditable(false);
 
         Label lblDeltager = new Label("Deltager");
         this.add(lblDeltager, 1, 4);
 
         lvwDeltagere = new ListView<>();
         this.add(lvwDeltagere, 1, 5, 1, 3);
-        lvwDeltagere.setPrefWidth(200);
-        lvwDeltagere.setPrefHeight(100);
+        lvwDeltagere.setPrefWidth(300);
+        lvwDeltagere.setPrefHeight(200);
         lvwDeltagere.getItems().setAll(Controller.getdeltagere());
+        lvwDeltagere.setEditable(false);
 
         HBox hBoxButtons = new HBox();
         this.add(hBoxButtons, 0, 9,2,2);
@@ -93,11 +97,15 @@ public class KonferencePane extends GridPane {
     }
 
     private void opretKonferenceAction() {
-        //TODO
+        KonferenceWindow konferenceWindow = new KonferenceWindow("Lav ny konference");
+        konferenceWindow.showAndWait();
+
+        this.updateControls();
     }
 
     public void updateControls() {
         Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
+        lvwKonference.getItems().setAll(Controller.getKonferencer());
         if (konference != null) {
             lvwArrangement.getItems().setAll(konference.getArrangementer());
             lvwHoteller.getItems().setAll(konference.getHoteller());
