@@ -2,15 +2,14 @@ package gui;
 
 import controller.Controller;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import modelclass.*;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
+
 
 
 public class DeltagerPane extends GridPane {
@@ -24,6 +23,7 @@ public class DeltagerPane extends GridPane {
     private final ListView<Tillæg> lvwTillæg;
     private final ListView<Arrangement> lvwArrangement;
     private KonferencePane konferencePane = new KonferencePane();
+
 
 
     public DeltagerPane(){
@@ -114,15 +114,16 @@ public class DeltagerPane extends GridPane {
         this.add(lvwArrangement,0,10);
         lvwArrangement.setPrefWidth(200);
         lvwArrangement.setPrefHeight(100);
-//        lvwArrangement.getItems().setAll(Controller.getarrangementer());
         lvwArrangement.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         lvwArrangement.setDisable(true);
+
+
+
 
         lvwHotel = new ListView<>();
         this.add(lvwHotel,0,12);
         lvwHotel.setPrefHeight(100);
         lvwHotel.setPrefWidth(200);
-        //
         ChangeListener<Hotel> hotelChangeListener = (oh, oldHotel, newHotel) -> this.hotelSelectionChanged();
         lvwHotel.getSelectionModel().selectedItemProperty().addListener(hotelChangeListener);
         lvwHotel.setDisable(true);
@@ -163,15 +164,19 @@ public class DeltagerPane extends GridPane {
 
     public void opretTilmeldingAction() {
         Deltager d1 = Controller.createDeltager(txfNavn.getText(),txfAdresse.getText(), Integer.parseInt(txfTlfNr.getText()), chBoxForedragsHolder.isSelected(), txfFirmaNavn.getText(), Integer.parseInt(txfFirmaTlf.getText()));
-        System.out.println(Controller.getdeltagere());
+
         if(chBoxLedsager.isSelected()){
             Ledsager l1 = Controller.createLedsager(txfLedsagerNavn.getText(), d1);
-            Controller.addArrangementToLedsager(lvwArrangement.getSelectionModel().getSelectedItem(),l1);
+            ObservableList<Arrangement> selectedItems = lvwArrangement.getSelectionModel().getSelectedItems();
+            for(Arrangement a : selectedItems){
+                Controller.addArrangementToLedsager(a, l1);
+            }
+            //TODO Få oprettet tekstfield med total pris
+            System.out.println(l1.samletPrisForUdflugter());
         }
         if(lvwKonferencer.getSelectionModel().getSelectedItem() != null){
             if(chBoxHotel.isSelected()){
                 Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, lvwHotel.getSelectionModel().getSelectedItem(), lvwKonferencer.getSelectionModel().getSelectedItem());
-                System.out.println(Controller.getdeltagere());
                 clearTextFields();
             }else{
                 Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, null, lvwKonferencer.getSelectionModel().getSelectedItem());
