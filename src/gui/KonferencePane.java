@@ -115,7 +115,7 @@ public class KonferencePane extends GridPane {
     }
 
     private void tilknytHotelAction() {
-        TilknytHotelWindow tilknytHotelWindow = new TilknytHotelWindow();
+        TilknytHotelWindow tilknytHotelWindow = new TilknytHotelWindow("Tilknyt Hotel Window");
         tilknytHotelWindow.showAndWait();
 
         this.updateControls();

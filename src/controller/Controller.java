@@ -55,9 +55,14 @@ public class Controller {
     }
 
     public static void addHotelToKonference(Konference konference, Hotel hotel){
-        if(!konference.getHoteller().contains(hotel)){
-            konference.addHotel(hotel);
+        try {
+            if(!konference.getHoteller().contains(hotel)){
+                konference.addHotel(hotel);
+            }
+        }catch (NullPointerException ex){
+            // Do nothing
         }
+
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------
@@ -144,8 +149,11 @@ public class Controller {
         Tilmelding t4 = createTilmelding("Afghanistan", "Jerusalem", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22), d4,h1,konference);
         Ledsager l2 = createLedsager("Finn Madsen", d4);
         addTillægToTilmelding(t4,tillæg1);
-        l2.addArrangement(a1);
-        l2.addArrangement(a2);
+        addArrangementToLedsager(a1,l2);
+        addArrangementToLedsager(a2,l2);
+        addHotelToKonference(konference,h1);
+        addHotelToKonference(konference,h2);
+        addHotelToKonference(konference,h3);
 
     }
 

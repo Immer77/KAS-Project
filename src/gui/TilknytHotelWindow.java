@@ -18,16 +18,24 @@ public class TilknytHotelWindow extends Stage {
     private ListView<Hotel> lvwHoteller = new ListView<>();
     private ListView<Konference> lvwKonferencer = new ListView<>();
 
+    public TilknytHotelWindow(String title){
+        this.initStyle(StageStyle.UTILITY);
+        this.initModality(Modality.APPLICATION_MODAL);
+        this.setResizable(false);
+
+        this.setTitle(title);
+        GridPane pane = new GridPane();
+        this.initContent(pane);
+
+        Scene scene = new Scene(pane);
+        this.setScene(scene);
+    }
     private void initContent(GridPane pane) {
         pane.setVgap(10);
         pane.setGridLinesVisible(false);
 
         Label lblKonferencer = new Label("Vælg konference");
-
         pane.add(lblKonferencer, 0, 0);
-
-        pane.add(lblKonferencer, 0, 0);
-
 
         lvwKonferencer.getItems().setAll(Controller.getKonferencer());
         lvwKonferencer.setEditable(false);
@@ -39,7 +47,7 @@ public class TilknytHotelWindow extends Stage {
         Label lblHoteller = new Label("Vælg hotel");
         pane.add(lblHoteller, 2, 0);
 
-        pane.add(lvwKonferencer, 0, 1);
+
 
 
         lvwHoteller.getItems().setAll(Controller.gethoteller());
@@ -60,13 +68,9 @@ public class TilknytHotelWindow extends Stage {
         Konference konference = lvwKonferencer.getSelectionModel().getSelectedItem();
 
         Hotel hotel = lvwHoteller.getSelectionModel().getSelectedItem();
-        Controller.addHotelToKonference(konference, hotel);
 
-        Button btnTilknytHotelToKonference = new Button("Tilknyt");
-        btnTilknytHotelToKonference.setOnAction(event -> tilknytAction());
-
-        Button btnFortryd = new Button("Fortryd");
-        btnFortryd.setOnAction(event -> fortrydAction());
+        Controller.addHotelToKonference(konference,hotel);
+        this.close();
     }
 
 
