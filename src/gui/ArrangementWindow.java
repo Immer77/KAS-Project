@@ -3,7 +3,7 @@ package gui;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,8 +19,8 @@ import java.awt.*;
 import java.time.LocalDate;
 
 public class ArrangementWindow extends Stage {
-    private Konference konference;
     private TextField txftitel, txfDato, txfPris;
+    private ListView<Konference> lvwKonferencer = new ListView<>();
 
     public ArrangementWindow(String title) {
         this.initStyle(StageStyle.UTILITY);
@@ -45,29 +45,38 @@ public class ArrangementWindow extends Stage {
         pane.add(lblTitel,0,0);
 
         txftitel = new TextField();
-        pane.add(txftitel,1,0);
+        pane.add(txftitel,1,0,2,1);
         txftitel.setPrefWidth(200);
 
         Label lblDato = new Label("Dato (yyyy-mm-dd)");
         pane.add(lblDato,0,1);
 
         txfDato = new TextField();
-        pane.add(txfDato,1,1);
+        pane.add(txfDato,1,1,2,1);
         txfDato.setPrefWidth(200);
 
         Label lblPris = new Label("Pris");
         pane.add(lblPris,0,2);
 
         txfPris = new TextField();
-        pane.add(txfPris,1,2);
+        pane.add(txfPris,1,2,2,1);
         txfPris.setPrefWidth(200);
 
-        Button btnCreate = new Button();
-        pane.add(btnCreate,2,2);
+        Label lblKonference = new Label("Vælg konference");
+        pane.add(lblKonference,0,3);
+
+
+        lvwKonferencer.setEditable(false);
+        lvwKonferencer.setPrefHeight(150);
+        lvwKonferencer.getItems().setAll(Controller.getKonferencer());
+        pane.add(lvwKonferencer,1,3,2,1);
+
+        Button btnCreate = new Button("Opret");
+        pane.add(btnCreate,1,5);
         btnCreate.setOnAction(event -> this.createAction());
 
-        Button btnCancel = new Button();
-        pane.add(btnCancel,2,3);
+        Button btnCancel = new Button("Fortryd");
+        pane.add(btnCancel,2,5);
         btnCancel.setOnAction(event -> this.cancelAction());
     }
 
@@ -77,16 +86,22 @@ public class ArrangementWindow extends Stage {
 
     public void createAction(){
         String titel = txftitel.getText().trim();
-        LocalDate dato = LocalDate.parse(txfDato.getText());
-        double pris = Double.parseDouble(txfPris.getText());
-        if (titel.length() > 0 && dato.isAfter(LocalDate.now())) {
-            Controller.createArrangement(titel, pris, dato);
-            this.hide();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Opret arrangement");
-            alert.setHeaderText("Alle informationer skal være gylidge!");
-            alert.showAndWait();
+        LocalDate dato = LocalDate.parse(txfDato.getText().trim());
+        double pris = Double.parseDouble(txfPris.getText().trim());
+        Konference konference = lvwKonferencer.getSelectionModel().getSelectedItem();
+        if(titel.length() == 0 && dato.equals("")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Opret arrangement");
+                alert.setHeaderText("Alle informationer skal være gylidge!");
+                alert.showAndWait();
+            }
+        else if (titel.length() > 0 && pris >= 0) {
+            if(txfDato.getText().length() == 0){
+                dato = LocalDate.now();
+            }
+            Arrangement arrangement = Controller.createArrangement(titel, pris, dato);
+            Controller.addArrangementToKonference(konference, arrangement);
+            this.close();
         }
 
     }

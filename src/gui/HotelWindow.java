@@ -79,7 +79,7 @@ public class HotelWindow extends Stage {
         double prisDouble = Double.parseDouble(txfPrisDouble.getText().trim());
         if (navn.length() > 0 && adresse.length() > 0 && prisDouble > 0 && prisEnkelt > 0) {
             Controller.createHotel(navn, adresse, prisEnkelt, prisDouble);
-            this.hide();
+            this.close();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
