@@ -22,8 +22,8 @@ public class Controller {
 
     //----------------------------------------------------------------------------------------------------------------------------------
 
-    public static Deltager createDeltager(String navn, String adresse, int cpr, int tlfNr, boolean erForedragsholder, String firmaNavn,int firmaTlf){
-        Deltager deltager = new Deltager(navn, adresse, cpr, tlfNr,erForedragsholder,firmaNavn,firmaTlf);
+    public static Deltager createDeltager(String navn, String adresse, int tlfNr, boolean erForedragsholder, String firmaNavn,int firmaTlf){
+        Deltager deltager = new Deltager(navn, adresse, tlfNr,erForedragsholder,firmaNavn,firmaTlf);
         Storage.addDeltager(deltager);
         return deltager;
     }
@@ -79,6 +79,10 @@ public class Controller {
         tilmelding.addTillæg(tillæg);
     }
 
+    public static ArrayList<Tillæg> getTillæg(Hotel hotel){
+        return new ArrayList<>(hotel.getTillæg());
+    }
+
     //-------------------------------------------------------------------------------
 
     public static Tilmelding createTilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager,Hotel hotel, Konference konference){
@@ -91,6 +95,10 @@ public class Controller {
     public static Ledsager createLedsager(String navn, Deltager deltager){
         Ledsager ledsager = deltager.createLedsager(navn);
         return ledsager;
+    }
+
+    public static void addArrangementToLedsager(Arrangement arrangement, Ledsager ledsager){
+        arrangement.addLedsager(ledsager);
     }
     //-------------------------------------------------------------------------------
 
@@ -110,20 +118,19 @@ public class Controller {
         Arrangement a2 = createArrangement("Egeskov",75,LocalDate.of(2022,4,20));
         Arrangement a3 = createArrangement("Trapholt Museum", 200, LocalDate.of(2022,4,22));
 
-        Deltager d1 = createDeltager("Finn Madsen", "Vejen 10", 2011680025, 88888888, false, "Intet firma", 0);
+        Deltager d1 = createDeltager("Finn Madsen", "Vejen 10", 88888888, false, "Intet firma", 0);
         createTilmelding("Danmark", "Bedsted", LocalDate.of(2022,4,20), LocalDate.of(2022,4,22), d1, null,konference);
 
-        Deltager d2 = createDeltager("Niels Petersen", "Vejen 11", 2103912094, 12323123,false,"Prutskid",123910);
+        Deltager d2 = createDeltager("Niels Petersen", "Vejen 11", 12323123,false,"Prutskid",123910);
         createTilmelding("Uruguay", "Krasnivkaovosa", LocalDate.of(2022,4,20), LocalDate.of(2022,4,22), d2,h1,konference);
 
-        Deltager d3 = createDeltager("Peter Sommer", "Skanderborgvej",2131290000,88888888,false,"Ptur",12930102);
+        Deltager d3 = createDeltager("Peter Sommer", "Skanderborgvej",88888888,false,"Ptur",12930102);
         Ledsager l1 = createLedsager("Mie Sommer",d3);
-        l1.addArrangement(a2);
-        l1.addArrangement(a3);
+        addArrangementToLedsager(a1,l1);
         Tilmelding t3 = createTilmelding("Danmark", "Bedsted", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22), d3, h1, konference);
         addTillægToTilmelding(t3,tillæg1);
 
-        Deltager d4 = createDeltager("Lone Jensen", "Prutvej 2", 20321412,2341312,true,"2sdafasd",1234121);
+        Deltager d4 = createDeltager("Lone Jensen", "Prutvej 2", 2341312,true,"2sdafasd",1234121);
         Tilmelding t4 = createTilmelding("Afghanistan", "Jerusalem", LocalDate.of(2022,4,20),LocalDate.of(2022,4,22), d4,h1,konference);
         Ledsager l2 = createLedsager("Finn Madsen", d4);
         addTillægToTilmelding(t4,tillæg1);

@@ -122,11 +122,14 @@ public class Konference {
      * @param hotel
      * @return
      */
+
+
     public Tilmelding createTilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato,Deltager deltager,Hotel hotel){
         Tilmelding tilmelding = new Tilmelding(land, by, ankomstDato, afrejseDato, deltager ,hotel, this);
         tilmeldinger.add(tilmelding);
         return tilmelding;
     }
+
 
     /**
      * Fjerner tilmelding

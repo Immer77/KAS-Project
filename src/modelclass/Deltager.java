@@ -20,8 +20,8 @@ public class Deltager extends Person {
      * @param firmaNavn
      * @param firmaTlf
      */
-    public Deltager(String navn, String adresse, int cpr, int tlfNr, boolean erForedragsholder, String firmaNavn,int firmaTlf) {
-        super(navn, adresse, cpr, tlfNr);
+    public Deltager(String navn, String adresse, int tlfNr, boolean erForedragsholder, String firmaNavn,int firmaTlf) {
+        super(navn, adresse, tlfNr);
         this.erForedragsholder = erForedragsholder;
         this.firmaNavn = firmaNavn;
         this.firmaTlf = firmaTlf;

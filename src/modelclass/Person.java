@@ -8,7 +8,7 @@ public class Person {
     private ArrayList<Deltager> deltagere = new ArrayList<>();
     private ArrayList<Arrangør> arrangøre = new ArrayList<>();
 
-    public Person(String navn, String adresse, int cpr, int tlfNr){
+    public Person(String navn, String adresse, int tlfNr){
         this.navn = navn;
         this.adresse = adresse;
         this.cpr = cpr;
