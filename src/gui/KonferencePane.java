@@ -96,4 +96,8 @@ public class KonferencePane extends GridPane {
     private void opretKonferenceAction() {
         //TODO
     }
+
+    public void updateControls(){
+        //TODO
+    }
 }
