@@ -12,6 +12,7 @@ public class Tilmelding {
     private Deltager deltager;
     private ArrayList<Tillæg> tillægslist = new ArrayList<>();
 
+
     public Tilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager, Hotel hotel, Konference konference){
         this.land = land;
         this.by = by;
