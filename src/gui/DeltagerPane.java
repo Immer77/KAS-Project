@@ -62,12 +62,12 @@ public class DeltagerPane extends GridPane {
         txfLand = new TextField();
         this.add(txfLand,1,5);
 
-        Label lblAnkomst = new Label("Ankomstdato");
+        Label lblAnkomst = new Label("Ankomstdato yyyy-mm-dd");
         this.add(lblAnkomst,0,6);
         txfAnkomst = new TextField();
         this.add(txfAnkomst,1,6);
 
-        Label lblAfrejse = new Label("Afrejsedato");
+        Label lblAfrejse = new Label("Afrejsedato yyyy-mm-dd");
         this.add(lblAfrejse,0,7);
         txfAfrejse = new TextField();
         this.add(txfAfrejse,1,7);
