@@ -105,6 +105,10 @@ public class Controller {
         return tilmelding;
     }
 
+    public static double beregnSamledeTilmeldingsPris(Tilmelding tilmelding){
+        return tilmelding.beregnSamletPris();
+    }
+
     //-------------------------------------------------------------------------------
 
     public static Ledsager createLedsager(String navn, Deltager deltager){
