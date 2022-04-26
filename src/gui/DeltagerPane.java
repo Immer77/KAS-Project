@@ -22,7 +22,7 @@ public class DeltagerPane extends GridPane {
     private final ListView<Konference> lvwKonferencer;
     private final ListView<Tillæg> lvwTillæg;
     private final ListView<Arrangement> lvwArrangement;
-    private KonferencePane konferencePane = new KonferencePane();
+
 
 
 
@@ -62,12 +62,12 @@ public class DeltagerPane extends GridPane {
         txfLand = new TextField();
         this.add(txfLand,1,5);
 
-        Label lblAnkomst = new Label("Ankomstdato");
+        Label lblAnkomst = new Label("Ankomstdato yyyy-mm-dd");
         this.add(lblAnkomst,0,6);
         txfAnkomst = new TextField();
         this.add(txfAnkomst,1,6);
 
-        Label lblAfrejse = new Label("Afrejsedato");
+        Label lblAfrejse = new Label("Afrejsedato yyyy-mm-dd");
         this.add(lblAfrejse,0,7);
         txfAfrejse = new TextField();
         this.add(txfAfrejse,1,7);
@@ -103,8 +103,6 @@ public class DeltagerPane extends GridPane {
         this.add(txfLedsagerNavn,1,9);
         txfLedsagerNavn.setDisable(true);
 
-
-
         Label lblHotel = new Label("Hoteller: ");
         this.add(lblHotel,0,11);
         this.add(chBoxHotel,1,11);
@@ -133,6 +131,7 @@ public class DeltagerPane extends GridPane {
         lvwTillæg.setPrefHeight(100);
         lvwTillæg.setPrefWidth(200);
         lvwTillæg.setDisable(true);
+        lvwTillæg.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 
 
@@ -141,10 +140,6 @@ public class DeltagerPane extends GridPane {
         this.add(btnOpretTilmelding,2,13);
         btnOpretTilmelding.setOnAction(event -> this.opretTilmeldingAction());
 
-
-
-
-        //TODO: Indsæt CheckBokse til foredragsholder, Ledsager, arrangement, hotel og tillæg
 
     }
 
@@ -172,15 +167,22 @@ public class DeltagerPane extends GridPane {
                 Controller.addArrangementToLedsager(a, l1);
             }
             //TODO Få oprettet tekstfield med total pris
-            System.out.println(l1.samletPrisForUdflugter());
+
         }
         if(lvwKonferencer.getSelectionModel().getSelectedItem() != null){
             if(chBoxHotel.isSelected()){
-                Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, lvwHotel.getSelectionModel().getSelectedItem(), lvwKonferencer.getSelectionModel().getSelectedItem());
+                Tilmelding tilmelding = Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, lvwHotel.getSelectionModel().getSelectedItem(), lvwKonferencer.getSelectionModel().getSelectedItem());
+                ObservableList<Tillæg> selectedTillæg = lvwTillæg.getSelectionModel().getSelectedItems();
+                for(Tillæg t : selectedTillæg){
+                    Controller.addTillægToTilmelding(tilmelding,t);
+                }
+                DeltagerPaneWindow deltagerPaneWindow = new DeltagerPaneWindow("Samlet pris", tilmelding);
+                deltagerPaneWindow.showAndWait();
                 clearTextFields();
             }else{
-                Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, null, lvwKonferencer.getSelectionModel().getSelectedItem());
-                System.out.println(Controller.getdeltagere());
+                Tilmelding tilmelding = Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, null, lvwKonferencer.getSelectionModel().getSelectedItem());
+                DeltagerPaneWindow deltagerPaneWindow = new DeltagerPaneWindow("Samlet pris", tilmelding);
+                deltagerPaneWindow.showAndWait();
                 clearTextFields();
 
             }
@@ -205,6 +207,16 @@ public class DeltagerPane extends GridPane {
         txfLand.clear();
         txfNavn.clear();
         txfAdresse.clear();
+        chBoxForedragsHolder.setSelected(false);
+        chBoxHotel.setSelected(false);
+        chBoxLedsager.setSelected(false);
+        lvwHotel.getItems().setAll();
+        lvwArrangement.getItems().setAll();
+        lvwTillæg.getItems().setAll();
+        lvwHotel.setDisable(true);
+        lvwTillæg.setDisable(true);
+        lvwArrangement.setDisable(true);
+        txfLedsagerNavn.setDisable(true);
     }
 
     private void updateControls(){
@@ -223,6 +235,7 @@ public class DeltagerPane extends GridPane {
             lvwHotel.setDisable(true);
             lvwTillæg.setDisable(true);
         }
+
     }
     public void updateTab(){
         lvwKonferencer.getItems().setAll(Controller.getKonferencer());
