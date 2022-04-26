@@ -62,7 +62,12 @@ public class Controller {
         }catch (NullPointerException ex){
             // Do nothing
         }
+    }
 
+    public static void addHotelToTilmelding(Hotel hotel, Tilmelding tilmelding){
+        if(!hotel.getTilmeldinger().contains(tilmelding)){
+            hotel.addTilmelding(tilmelding);
+        }
     }
 
     //----------------------------------------------------------------------------------------------------------------------------------
@@ -102,6 +107,9 @@ public class Controller {
 
     public static Tilmelding createTilmelding(String land, String by, LocalDate ankomstDato, LocalDate afrejseDato, Deltager deltager,Hotel hotel, Konference konference){
         Tilmelding tilmelding = konference.createTilmelding(land,by,ankomstDato,afrejseDato,deltager,hotel);
+        if(hotel != null){
+            addHotelToTilmelding(hotel, tilmelding);
+        }
         return tilmelding;
     }
 

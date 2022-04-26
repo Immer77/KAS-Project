@@ -144,8 +144,8 @@ public class DeltagerPane extends GridPane {
     }
 
     private void konferenceActionUpdate() {
-        lvwHotel.getItems().setAll(Controller.gethoteller());
-        lvwArrangement.getItems().setAll(Controller.getarrangementer());
+        lvwHotel.getItems().setAll(lvwKonferencer.getSelectionModel().getSelectedItem().getHoteller());
+        lvwArrangement.getItems().setAll(lvwKonferencer.getSelectionModel().getSelectedItem().getArrangementer());
 
     }
 

@@ -142,6 +142,7 @@ public class KonferencePane extends GridPane {
             Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
             lvwHoteller.getItems().setAll(konference.getHoteller());
             lvwArrangement.getItems().setAll(konference.getArrangementer());
+            lvwKonference.getItems().setAll(Controller.getKonferencer());
             ArrayList<Deltager> deltagers = new ArrayList<>();
             for (Tilmelding t : konference.getTilmeldinger()) {
                 deltagers.add(t.getDeltager());
@@ -154,21 +155,5 @@ public class KonferencePane extends GridPane {
             alert.setTitle("No Conference has been selected");
             alert.setHeaderText("Vælg venligst en konference");
         }
-
-
-
-        //        Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
-//        lvwKonference.getItems().setAll(Controller.getKonferencer());
-//        if (konference != null) {
-//            lvwArrangement.getItems().setAll(konference.getArrangementer());
-//            lvwHoteller.getItems().setAll(konference.getHoteller());
-//            ArrayList<Deltager> deltagers = new ArrayList<>();
-//            for (Tilmelding t : konference.getTilmeldinger()){
-//                deltagers.add(t.getDeltager());
-//            }
-//            lvwDeltagere.getItems().setAll(deltagers);
-//
-//        }
-
     }
 }

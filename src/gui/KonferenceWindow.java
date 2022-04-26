@@ -102,7 +102,7 @@ public class KonferenceWindow extends Stage {
 
         if (navn.length() > 0 && lokation.length() > 0 && afgiftPrDag > 0){
             Controller.createKonference(navn,lokation,fraDato,tilDato,afgiftPrDag);
-            this.hide();
+            this.close();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

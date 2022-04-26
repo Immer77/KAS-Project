@@ -105,4 +105,13 @@ public class Tilmelding {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+
+    @Override
+    public String toString() {
+        if(deltager.getLedsager() != null){
+            return deltager.getNavn() + "        Ledsager: " + deltager.getLedsager().getNavn();
+        } else {
+            return deltager.getNavn();
+        }
+    }
 }

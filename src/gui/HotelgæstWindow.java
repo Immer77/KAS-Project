@@ -52,7 +52,6 @@ public class HotelgæstWindow extends Stage {
         btnOkay.setOnAction(event -> this.okayAction());
 
         lvwHotelgæster.getItems().setAll(hotel.getTilmeldinger());
-        System.out.println(hotel.getTilmeldinger());
     }
 
     private void okayAction() {
