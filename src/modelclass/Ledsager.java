@@ -69,4 +69,8 @@ public class Ledsager {
         this.navn = navn;
     }
 
+    @Override
+    public String toString() {
+        return navn + " (" + deltager.getNavn() + " " + deltager.getTlfNr() +   ")";
+    }
 }

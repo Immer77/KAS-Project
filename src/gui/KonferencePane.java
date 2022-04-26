@@ -48,6 +48,7 @@ public class KonferencePane extends GridPane {
         lvwHoteller.setPrefHeight(200);
         lvwHoteller.getItems().setAll(Controller.gethoteller());
         lvwHoteller.setEditable(false);
+        lvwHoteller.setOnMouseClicked(event -> this.hotelGæsteListe());
 
         Label lblArrangement = new Label("Arrangement");
         this.add(lblArrangement, 1, 0);
@@ -58,6 +59,7 @@ public class KonferencePane extends GridPane {
         lvwArrangement.setPrefWidth(300);
         lvwArrangement.getItems().setAll(Controller.getarrangementer());
         lvwArrangement.setEditable(false);
+        lvwArrangement.setOnMouseClicked(event -> this.opretLedsagerListe());
 
         Label lblDeltager = new Label("Deltager");
         this.add(lblDeltager, 1, 4);
@@ -91,6 +93,20 @@ public class KonferencePane extends GridPane {
         hBoxButtons.getChildren().add(btnTilknytHotel);
         btnTilknytHotel.setOnAction(event -> this.tilknytHotelAction());
 
+    }
+
+    private void hotelGæsteListe() {
+        HotelgæstWindow hotelgæstWindow = new HotelgæstWindow(lvwHoteller.getSelectionModel().getSelectedItem().getNavn(), lvwHoteller.getSelectionModel().getSelectedItem());
+        hotelgæstWindow.showAndWait();
+
+        this.updateControls();
+    }
+
+    private void opretLedsagerListe() {
+        LedsagerWindow ledsagerWindow = new LedsagerWindow("Ledsagere til " + lvwArrangement.getSelectionModel().getSelectedItem().getTitel(), lvwArrangement.getSelectionModel().getSelectedItem());
+        ledsagerWindow.showAndWait();
+
+        this.updateControls();
     }
 
     private void opretHotelAction() {
