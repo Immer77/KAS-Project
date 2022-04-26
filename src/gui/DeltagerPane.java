@@ -144,9 +144,13 @@ public class DeltagerPane extends GridPane {
     }
 
     private void konferenceActionUpdate() {
-        lvwHotel.getItems().setAll(lvwKonferencer.getSelectionModel().getSelectedItem().getHoteller());
-        lvwArrangement.getItems().setAll(lvwKonferencer.getSelectionModel().getSelectedItem().getArrangementer());
+        try {
+            lvwHotel.getItems().setAll(lvwKonferencer.getSelectionModel().getSelectedItem().getHoteller());
+            lvwArrangement.getItems().setAll(lvwKonferencer.getSelectionModel().getSelectedItem().getArrangementer());
 
+        }catch (NullPointerException exception){
+            // Do Nothing
+        }
     }
 
     private void hotelSelectionChanged() {
@@ -158,41 +162,51 @@ public class DeltagerPane extends GridPane {
     }
 
     public void opretTilmeldingAction() {
-        Deltager d1 = Controller.createDeltager(txfNavn.getText(),txfAdresse.getText(), Integer.parseInt(txfTlfNr.getText()), chBoxForedragsHolder.isSelected(), txfFirmaNavn.getText(), Integer.parseInt(txfFirmaTlf.getText()));
+        try {
+            Deltager d1 = Controller.createDeltager(txfNavn.getText(),txfAdresse.getText(), Integer.parseInt(txfTlfNr.getText()), chBoxForedragsHolder.isSelected(), txfFirmaNavn.getText(), Integer.parseInt(txfFirmaTlf.getText()));
 
-        if(chBoxLedsager.isSelected()){
-            Ledsager l1 = Controller.createLedsager(txfLedsagerNavn.getText(), d1);
-            ObservableList<Arrangement> selectedItems = lvwArrangement.getSelectionModel().getSelectedItems();
-            for(Arrangement a : selectedItems){
-                Controller.addArrangementToLedsager(a, l1);
-            }
-            //TODO Få oprettet tekstfield med total pris
-
-        }
-        if(lvwKonferencer.getSelectionModel().getSelectedItem() != null){
-            if(chBoxHotel.isSelected()){
-                Tilmelding tilmelding = Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, lvwHotel.getSelectionModel().getSelectedItem(), lvwKonferencer.getSelectionModel().getSelectedItem());
-                ObservableList<Tillæg> selectedTillæg = lvwTillæg.getSelectionModel().getSelectedItems();
-                for(Tillæg t : selectedTillæg){
-                    Controller.addTillægToTilmelding(tilmelding,t);
+            if(chBoxLedsager.isSelected()){
+                Ledsager l1 = Controller.createLedsager(txfLedsagerNavn.getText(), d1);
+                ObservableList<Arrangement> selectedItems = lvwArrangement.getSelectionModel().getSelectedItems();
+                for(Arrangement a : selectedItems){
+                    if(!l1.getArrangementer().contains(a)){
+                        Controller.addArrangementToLedsager(a, l1);
+                    }
                 }
-                DeltagerPaneWindow deltagerPaneWindow = new DeltagerPaneWindow("Samlet pris", tilmelding);
-                deltagerPaneWindow.showAndWait();
-                clearTextFields();
-            }else{
-                Tilmelding tilmelding = Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, null, lvwKonferencer.getSelectionModel().getSelectedItem());
-                DeltagerPaneWindow deltagerPaneWindow = new DeltagerPaneWindow("Samlet pris", tilmelding);
-                deltagerPaneWindow.showAndWait();
-                clearTextFields();
+                //TODO Få oprettet tekstfield med total pris
 
             }
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Missing Input");
-            alert.setHeaderText("Vælg venligst konference");
-            alert.show();
-        }
+            if(lvwKonferencer.getSelectionModel().getSelectedItem() != null){
+                if(chBoxHotel.isSelected()){
+                    Tilmelding tilmelding = Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, lvwHotel.getSelectionModel().getSelectedItem(), lvwKonferencer.getSelectionModel().getSelectedItem());
+                    ObservableList<Tillæg> selectedTillæg = lvwTillæg.getSelectionModel().getSelectedItems();
+                    for(Tillæg t : selectedTillæg){
+                        Controller.addTillægToTilmelding(tilmelding,t);
+                    }
+                    DeltagerPaneWindow deltagerPaneWindow = new DeltagerPaneWindow("Samlet pris", tilmelding);
+                    deltagerPaneWindow.showAndWait();
+                    clearTextFields();
+                }else{
+                    Tilmelding tilmelding = Controller.createTilmelding(txfLand.getText(),txfby.getText(), LocalDate.parse(txfAnkomst.getText()),LocalDate.parse(txfAfrejse.getText()), d1, null, lvwKonferencer.getSelectionModel().getSelectedItem());
+                    DeltagerPaneWindow deltagerPaneWindow = new DeltagerPaneWindow("Samlet pris", tilmelding);
+                    deltagerPaneWindow.showAndWait();
+                    clearTextFields();
 
+                }
+            }else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Missing Input");
+                alert.setHeaderText("Vælg venligst konference");
+                alert.show();
+            }
+        }catch (Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fejl 40");
+            alert.setHeaderText("Noget gik galt, tjek om du har skrevet det korrekt ind");
+            alert.show();
+            clearTextFields();
+
+        }
     }
 
     private void clearTextFields(){

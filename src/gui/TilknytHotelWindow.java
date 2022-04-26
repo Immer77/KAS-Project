@@ -75,7 +75,7 @@ public class TilknytHotelWindow extends Stage {
 
 
     public void fortrydAction() {
-        this.hide();
+        this.close();
     }
 
 

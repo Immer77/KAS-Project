@@ -28,7 +28,7 @@ public class KonferencePane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        Label lblKonference = new Label("Konferencer");
+        Label lblKonference = new Label("Konferencer (Klik på Konference for at opdatere informationerne");
         this.add(lblKonference, 0, 0);
 
         lvwKonference = new ListView<>();
@@ -96,15 +96,24 @@ public class KonferencePane extends GridPane {
     }
 
     private void hotelGæsteListe() {
-        HotelgæstWindow hotelgæstWindow = new HotelgæstWindow(lvwHoteller.getSelectionModel().getSelectedItem().getNavn(), lvwHoteller.getSelectionModel().getSelectedItem());
-        hotelgæstWindow.showAndWait();
+        try {
+            HotelgæstWindow hotelgæstWindow = new HotelgæstWindow(lvwHoteller.getSelectionModel().getSelectedItem().getNavn(), lvwHoteller.getSelectionModel().getSelectedItem());
+            hotelgæstWindow.showAndWait();
+        }catch (NullPointerException exception){
+            // Do nothing
+        }
 
         this.updateControls();
     }
 
     private void opretLedsagerListe() {
-        LedsagerWindow ledsagerWindow = new LedsagerWindow("Ledsagere til " + lvwArrangement.getSelectionModel().getSelectedItem().getTitel(), lvwArrangement.getSelectionModel().getSelectedItem());
-        ledsagerWindow.showAndWait();
+        try{
+            LedsagerWindow ledsagerWindow = new LedsagerWindow("Ledsagere til " + lvwArrangement.getSelectionModel().getSelectedItem().getTitel(), lvwArrangement.getSelectionModel().getSelectedItem());
+            ledsagerWindow.showAndWait();
+        }catch (NullPointerException ex){
+            // Do nothing
+        }
+
 
         this.updateControls();
     }
@@ -127,7 +136,7 @@ public class KonferencePane extends GridPane {
         KonferenceWindow konferenceWindow = new KonferenceWindow("Lav ny konference");
         konferenceWindow.showAndWait();
 
-        this.updateControls();
+        lvwKonference.getItems().setAll(Controller.getKonferencer());
     }
 
     private void tilknytHotelAction() {
@@ -135,9 +144,11 @@ public class KonferencePane extends GridPane {
         tilknytHotelWindow.showAndWait();
 
         this.updateControls();
+
     }
 
     public void updateControls() {
+
         try {
             Konference konference = lvwKonference.getSelectionModel().getSelectedItem();
             lvwHoteller.getItems().setAll(konference.getHoteller());
