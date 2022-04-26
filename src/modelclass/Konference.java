@@ -10,10 +10,10 @@ public class Konference {
     private LocalDate tilDato;
     private LocalDate fraDato;
     private Arrangør arrangør;
+    private double afgiftPrDag;
     private final ArrayList<Hotel> hoteller = new ArrayList<>();
     private final ArrayList<Arrangement> arrangementer = new ArrayList<>();
     private final ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
-    private double afgiftPrDag;
 
     // Constructor
     public Konference(String navn, String lokation, LocalDate fraDato, LocalDate tilDato, double afgiftPrDag){
@@ -25,14 +25,6 @@ public class Konference {
         
     }
 
-    // Get og setter af arrangør
-    public void setArrangør(Arrangør arrangør) {
-        this.arrangør = arrangør;
-    }
-
-    public Arrangør getArrangør() {
-        return arrangør;
-    }
 
     /**
      * Returnerer en kopi af hoteller til konferencen
@@ -143,6 +135,11 @@ public class Konference {
 
     //------------------------------------------------------------------------
     //Getter og setters
+
+    public Arrangør getArrangør() {
+        return arrangør;
+    }
+
     public String getNavn() {
         return navn;
     }
@@ -151,36 +148,8 @@ public class Konference {
         this.navn = navn;
     }
 
-    public String getLokation() {
-        return lokation;
-    }
-
-    public void setLokation(String lokation) {
-        this.lokation = lokation;
-    }
-
-    public LocalDate getTilDato() {
-        return tilDato;
-    }
-
-    public void setTilDato(LocalDate tilDato) {
-        this.tilDato = tilDato;
-    }
-
-    public LocalDate getFraDato() {
-        return fraDato;
-    }
-
-    public void setFraDato(LocalDate fraDato) {
-        this.fraDato = fraDato;
-    }
-
     public double getAfgiftPrDag() {
         return afgiftPrDag;
-    }
-
-    public void setAfgiftPrDag(double afgiftPrDag) {
-        this.afgiftPrDag = afgiftPrDag;
     }
 
     @Override

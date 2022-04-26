@@ -98,13 +98,6 @@ public class Tilmelding {
         tillægslist.remove(tillæg);
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
 
     @Override
     public String toString() {

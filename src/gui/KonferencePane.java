@@ -57,7 +57,7 @@ public class KonferencePane extends GridPane {
         this.add(lvwArrangement, 1, 1, 1, 3);
         lvwArrangement.setPrefHeight(100);
         lvwArrangement.setPrefWidth(300);
-        lvwArrangement.getItems().setAll(Controller.getarrangementer());
+        lvwArrangement.getItems().setAll(Controller.getArrangementer());
         lvwArrangement.setEditable(false);
         lvwArrangement.setOnMouseClicked(event -> this.opretLedsagerListe());
 

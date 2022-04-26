@@ -11,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import modelclass.Arrangement;
 import modelclass.Konference;
 
 import java.time.LocalDate;

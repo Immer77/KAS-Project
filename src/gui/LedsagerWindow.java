@@ -1,21 +1,16 @@
 package gui;
 
-import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modelclass.Arrangement;
 import modelclass.Ledsager;
-import modelclass.Tilmelding;
-
-import java.util.ArrayList;
 
 public class LedsagerWindow extends Stage {
     private ListView<Ledsager> lvwLedsagere;

@@ -1,6 +1,5 @@
 package gui;
 
-import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,11 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import modelclass.Deltager;
 import modelclass.Hotel;
 import modelclass.Tilmelding;
-
-import java.util.ArrayList;
 
 public class HotelgæstWindow extends Stage {
     private ListView<Tilmelding> lvwHotelgæster;

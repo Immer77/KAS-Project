@@ -1,7 +1,5 @@
 package modelclass;
 
-import javafx.scene.control.skin.TooltipSkin;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -90,24 +88,8 @@ public class Arrangement {
         return titel;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
-    }
-
     public double getPris() {
         return pris;
-    }
-
-    public void setPris(double pris) {
-        this.pris = pris;
-    }
-
-    public LocalDate getDato() {
-        return dato;
-    }
-
-    public void setDato(LocalDate dato) {
-        this.dato = dato;
     }
 
     @Override

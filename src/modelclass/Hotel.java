@@ -55,20 +55,22 @@ public class Hotel {
         tilmeldinger.remove(tilmelding);
     }
 
+    public void addTillæg(Tillæg tillæg){
+        if(!tillægslist.contains(tillæg)){
+            tillægslist.add(tillæg);
+        }
+    }
+
+    public void removeTillæg(Tillæg tillæg){
+        tillægslist.remove(tillæg);
+    }
+
     public double getPrisEnkeltVærelse() {
         return prisEnkeltVærelse;
     }
 
-    public void setPrisEnkeltVærelse(double prisEnkeltVærelse) {
-        this.prisEnkeltVærelse = prisEnkeltVærelse;
-    }
-
     public double getPrisDoubleVærelse() {
         return prisDoubleVærelse;
-    }
-
-    public void setPrisDoubleVærelse(double prisDoubleVærelse) {
-        this.prisDoubleVærelse = prisDoubleVærelse;
     }
 
     public String getNavn() {return navn;}

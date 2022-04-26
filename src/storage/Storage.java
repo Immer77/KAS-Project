@@ -10,8 +10,6 @@ public class Storage {
     private static ArrayList<Arrangement> arrangementer = new ArrayList<>();
     private static ArrayList<Hotel> hoteller = new ArrayList<>();
     private static ArrayList<Konference> konferencer = new ArrayList<>();
-    private static ArrayList<Tilmelding> tilmeldinger = new ArrayList<>();
-    private static ArrayList<Tillæg> tillægs = new ArrayList<>();
 
     //-----------------------------------------------------------------
 

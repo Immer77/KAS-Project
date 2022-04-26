@@ -14,10 +14,6 @@ public class Tillæg {
         return pris;
     }
 
-    public void setPris(double pris) {
-        this.pris = pris;
-    }
-
     public String getNavn() {
         return navn;
     }

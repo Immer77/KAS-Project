@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import modelclass.Deltager;
 import modelclass.Tilmelding;
 
 

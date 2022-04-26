@@ -64,6 +64,10 @@ public class Controller {
         }
     }
 
+    public static void removeHotelFromKonference(Konference konference, Hotel hotel){
+        konference.removeHotel(hotel);
+    }
+
     public static void addHotelToTilmelding(Hotel hotel, Tilmelding tilmelding){
         if(!hotel.getTilmeldinger().contains(tilmelding)){
             hotel.addTilmelding(tilmelding);
@@ -82,7 +86,7 @@ public class Controller {
     public static void deleteArrangement(Arrangement arrangement){
         Storage.removeArrangement(arrangement);
     }
-    public static ArrayList<Arrangement> getarrangementer(){
+    public static ArrayList<Arrangement> getArrangementer(){
         return Storage.getArrangementer();
     }
 
@@ -97,6 +101,14 @@ public class Controller {
 
     public static void addTillægToTilmelding(Tilmelding tilmelding, Tillæg tillæg){
         tilmelding.addTillæg(tillæg);
+    }
+
+    public static void addTillægToHotel(Tillæg tillæg, Hotel hotel){
+        hotel.addTillæg(tillæg);
+    }
+
+    public static void removeTillægFromHotel(Tillæg tillæg, Hotel hotel){
+        hotel.removeTillæg(tillæg);
     }
 
     public static ArrayList<Tillæg> getTillæg(Hotel hotel){
